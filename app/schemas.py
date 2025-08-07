@@ -9,6 +9,9 @@ class PostBase(BaseModel):
     content: str
     published: bool = True
     # rating: Optional[int] = None
+    class Config:
+     from_attributes = True
+
 
 class PostCreate(PostBase):
     pass
@@ -31,7 +34,16 @@ class Post(PostBase):
     owner: UserOut
 
     class Config:
-        orm_mode = True
+     from_attributes = True
+
+
+class PostOut(BaseModel):
+    post: Post
+    votes: int        
+
+    class Config:
+     from_attributes = True
+
 
 class UserCreate(BaseModel):
     email: EmailStr
